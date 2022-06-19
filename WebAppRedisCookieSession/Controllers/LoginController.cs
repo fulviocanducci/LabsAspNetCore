@@ -32,7 +32,7 @@ namespace WebAppRedisCookieSession.Controllers
                 new Claim(ClaimTypes.NameIdentifier, Guid.NewGuid().ToString("N")),
                 new Claim(ClaimTypes.IsPersistent, "false"),
             };
-            for(int i = 0; i < 100; i++)
+            for(int i = 1; i < 100; i++)
             {
                 claims.Add(new Claim(ClaimTypes.Role, $"Suporte_{i:0000}"));
             }
@@ -40,7 +40,7 @@ namespace WebAppRedisCookieSession.Controllers
             AuthenticationProperties authProperties = new()
             {
                 AllowRefresh = true,
-                IsPersistent = false,
+                IsPersistent = false
             };
             await HttpContext.SignInAsync(CookieAuthenticationDefaults.AuthenticationScheme, new ClaimsPrincipal(claimsIdentity), authProperties);
             return RedirectToAction("Index", "Home");
@@ -52,6 +52,6 @@ namespace WebAppRedisCookieSession.Controllers
         {
             await HttpContext.SignOutAsync(CookieAuthenticationDefaults.AuthenticationScheme);
             return RedirectToAction("Index", "Login");
-        }
+        }        
     }
 }

@@ -5,8 +5,7 @@ using System.Diagnostics;
 using WebAppRedisCookieSession.Models;
 
 namespace WebAppRedisCookieSession.Controllers
-{
-    [Authorize]
+{    
     public class HomeController : Controller
     {
         private readonly ILogger<HomeController> _logger;
@@ -16,22 +15,36 @@ namespace WebAppRedisCookieSession.Controllers
             _logger = logger;
         }
 
+        [Authorize]
         public IActionResult Index()
         {
             _logger.LogInformation("Pagina Home");
             return View();
         }
 
+        [Authorize]
         public IActionResult Privacy()
         {
             _logger.LogInformation("Pagina Privacidade");
             return View();
         }
-
-        [ResponseCache(Duration = 0, Location = ResponseCacheLocation.None, NoStore = true)]
-        public IActionResult Error()
+       
+        [Authorize(Roles = "Suporte_0000")]
+        public IActionResult Suporte0()
         {
-            return View(new ErrorViewModel { RequestId = Activity.Current?.Id ?? HttpContext.TraceIdentifier });
+            return View();
+        }
+
+        [Authorize(Roles = "Suporte_0001")]
+        public IActionResult Suporte1()
+        {
+            return View();
+        }
+
+        [Authorize(Roles = "Suporte_0002")]
+        public IActionResult Suporte2()
+        {
+            return View();
         }
     }
 }
