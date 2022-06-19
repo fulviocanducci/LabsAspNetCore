@@ -1,0 +1,4 @@
+﻿<div class="mt-3">
+  Deseja sair usuario: @(User.Identity.IsAuthenticated ? User.Identity.Name : "")? 
+  <a asp-action="Logoff" class="btn btn-sm btn-link" asp-controller="Login">Sair</a>
+</div>
