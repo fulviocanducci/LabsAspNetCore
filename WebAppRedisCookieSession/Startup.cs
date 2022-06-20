@@ -30,11 +30,13 @@ namespace WebAppRedisCookieSession
         {
             services.AddMemoryCache();
             services.AddDataProtection();
+            #region ITicketStore
             services.AddSingleton<ITicketStore, MemoryCacheTicketStore>();
             services.AddOptions<CookieAuthenticationOptions>(CookieAuthenticationDefaults.AuthenticationScheme)
              .Configure<ITicketStore>((options, store) => {
                  options.SessionStore = store;
              });
+            #endregion
             services.AddAuthentication(CookieAuthenticationDefaults.AuthenticationScheme)
                 .AddCookie(options =>
                 {
